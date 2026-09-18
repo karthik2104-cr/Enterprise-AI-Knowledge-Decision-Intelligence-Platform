@@ -1,0 +1,38 @@
+[
+  {
+    "question": "What is the company's leave policy?",
+    "expected_evidence": ["Leave Policy", "Employee Handbook"],
+    "expected_answer": "Full-time employees receive 20 days of paid annual leave and 10 days of sick leave. Parental leave is 16 weeks for primary caregivers.",
+    "must_include": ["20 days", "leave"]
+  },
+  {
+    "question": "What was Q3 revenue?",
+    "expected_evidence": ["Q3 Financial Report"],
+    "expected_answer": "Q3 revenue was $13.888 million.",
+    "must_include": ["13.888", "revenue"]
+  },
+  {
+    "question": "Compare Q2 and Q3 revenue.",
+    "expected_evidence": ["Q2 Financial Report", "Q3 Financial Report"],
+    "expected_answer": "Revenue increased from $12.4 million in Q2 to $13.888 million in Q3, about 12%.",
+    "must_include": ["12.4", "Q3"]
+  },
+  {
+    "question": "What changed in Q3?",
+    "expected_evidence": ["Q3 Financial Report"],
+    "expected_answer": "Q3 closed delayed renewals, expanded usage analytics, improved NPS, and reduced tickets and attrition.",
+    "must_include": ["Q3"]
+  },
+  {
+    "question": "What are the major compliance requirements?",
+    "expected_evidence": ["Compliance Guidelines"],
+    "expected_answer": "Anti-bribery, data protection, insider information, gifts, conflicts of interest, records retention, and speak-up reporting.",
+    "must_include": ["bribery", "compliance"]
+  },
+  {
+    "question": "What is the employee reimbursement policy?",
+    "expected_evidence": ["Employee Handbook"],
+    "expected_answer": "Reasonable pre-approved business expenses with receipts submitted within 30 days are reimbursable.",
+    "must_include": ["reimburse"]
+  }
+]

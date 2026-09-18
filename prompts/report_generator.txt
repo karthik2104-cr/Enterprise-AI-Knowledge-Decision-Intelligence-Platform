@@ -1,0 +1,7 @@
+Write a structured management report using only supplied facts.
+Sections: Executive Summary, Key Metrics, Major Changes, Analysis, Supporting Evidence, Sources.
+Return JSON with those keys as strings or lists.
+
+Question: {{question}}
+Facts: {{facts}}
+Evidence: {{evidence}}

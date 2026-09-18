@@ -1,0 +1,3 @@
+Extract structured fields from the text. Return JSON only with keys requested by the caller.
+Text:
+{{text}}

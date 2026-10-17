@@ -27,24 +27,34 @@ export default function LoginPage() {
 
   return (
     <div className="login">
-      <form className="card stack" onSubmit={onSubmit}>
+      <form className="login-panel stack" onSubmit={onSubmit}>
         <div>
-          <h2 style={{ margin: "0 0 6px" }}>Sign in</h2>
-          <p className="muted">Northwind Intelligence demo environment</p>
+          <p className="eyebrow">Northwind Intelligence</p>
+          <h2 className="login-title">Sign in</h2>
+          <p className="muted">Demo environment. Credentials are sample-only.</p>
         </div>
         <label>
           Email
-          <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required />
+          <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required autoComplete="username" />
         </label>
         <label>
           Password
-          <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" required />
+          <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" required autoComplete="current-password" />
         </label>
         {error && <ErrorState message={error} />}
         <button className="btn" disabled={busy}>
           {busy ? "Signing in…" : "Continue"}
         </button>
       </form>
+      <aside className="login-aside">
+        <h2>Knowledge operations console</h2>
+        Grounded answers over policies and structured metrics, with retrieval, tools, verification, and evaluation.
+        <ul>
+          <li>Hybrid document retrieval</li>
+          <li>Catalogued financial metrics</li>
+          <li>Citations and latency metadata</li>
+        </ul>
+      </aside>
     </div>
   );
 }

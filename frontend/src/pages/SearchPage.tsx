@@ -37,21 +37,36 @@ export default function SearchPage() {
     <div>
       <h2 className="page-title">Search</h2>
       <p className="lede">Hybrid retrieval with metadata filters, independent of Ask AI.</p>
-      <form className="card stack" onSubmit={onSubmit}>
-        <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="employee leave policy" required />
+      <form className="panel stack" onSubmit={onSubmit}>
+        <label>
+          Query
+          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="employee leave policy" required />
+        </label>
         <div className="row">
-          <input value={document_type} onChange={(e) => setType(e.target.value)} placeholder="Document type" />
-          <input value={department} onChange={(e) => setDept(e.target.value)} placeholder="Department" />
-          <input value={year} onChange={(e) => setYear(e.target.value)} placeholder="Year" />
-          <input value={section} onChange={(e) => setSection(e.target.value)} placeholder="Section" />
-          <button className="btn" disabled={busy}>Search</button>
+          <label>
+            Document type
+            <input value={document_type} onChange={(e) => setType(e.target.value)} />
+          </label>
+          <label>
+            Department
+            <input value={department} onChange={(e) => setDept(e.target.value)} />
+          </label>
+          <label>
+            Year
+            <input value={year} onChange={(e) => setYear(e.target.value)} />
+          </label>
+          <label>
+            Section
+            <input value={section} onChange={(e) => setSection(e.target.value)} />
+          </label>
+          <button className="btn align-end" disabled={busy}>Search</button>
         </div>
       </form>
       {error && <ErrorState message={error} />}
       {busy && <Loading label="Searching…" />}
       {hits && hits.length === 0 && <Empty title="No matches" body="Try a broader query or clear filters." />}
       {hits && hits.length > 0 && (
-        <div className="card" style={{ marginTop: 16 }}>
+        <div className="table-wrap mt">
           <table>
             <thead>
               <tr>

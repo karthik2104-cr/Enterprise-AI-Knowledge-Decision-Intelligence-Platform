@@ -45,20 +45,21 @@ export default function EvaluationPage() {
       {error && <ErrorState message={error} />}
       {busy && <Loading label="Scoring retrieval and answers…" />}
       {latest && (
-        <div className="grid-4" style={{ marginTop: 16 }}>
+        <div className="metric-strip mt">
           {["precision_at_5", "recall_at_5", "mrr", "ndcg_at_5", "answer_correctness", "groundedness", "citation_correctness", "avg_latency_ms"].map((key) => (
-            <div className="card" key={key}>
-              <h3>{key.replaceAll("_", " ")}</h3>
-              <div className="metric" style={{ fontSize: 22 }}>{metrics[key] ?? "—"}</div>
+            <div className="metric-cell" key={key}>
+              <h3>{key.replace(/_/g, " ")}</h3>
+              <div className="metric compact">{metrics[key] ?? "—"}</div>
             </div>
           ))}
         </div>
       )}
-      <div className="card" style={{ marginTop: 16 }}>
+      <div className="panel mt">
         <h3>Per-question results</h3>
         {results.length === 0 ? (
           <Empty title="No results" body="Run evaluation to score the sample questions." />
         ) : (
+          <div className="table-wrap flat">
           <table>
             <thead>
               <tr><th>Question</th><th>Pass</th><th>P@5</th><th>Recall</th><th>Correct</th><th>Grounded</th></tr>
@@ -79,6 +80,7 @@ export default function EvaluationPage() {
               })}
             </tbody>
           </table>
+          </div>
         )}
       </div>
     </div>

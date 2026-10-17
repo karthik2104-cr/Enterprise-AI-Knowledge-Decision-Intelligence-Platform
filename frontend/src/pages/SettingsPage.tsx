@@ -6,7 +6,7 @@ export default function SettingsPage() {
         Runtime configuration is supplied through environment variables. This UI does not store secrets.
         Authentication is a demo JWT user, not SSO.
       </p>
-      <div className="card">
+      <div className="panel">
         <table>
           <tbody>
             <tr>

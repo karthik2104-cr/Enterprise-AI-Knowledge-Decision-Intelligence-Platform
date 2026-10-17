@@ -41,7 +41,7 @@ export default function HistoryPage() {
     <div>
       <h2 className="page-title">History</h2>
       <p className="lede">Prior questions, summaries, sources, and tools.</p>
-      <div className="card">
+      <div className="table-wrap">
         <table>
           <thead>
             <tr>
@@ -67,13 +67,13 @@ export default function HistoryPage() {
       </div>
       {id && !detail && <Loading />}
       {detail && (
-        <div className="card" style={{ marginTop: 16 }}>
+        <section className="panel mt">
           <h3>{String(detail.question)}</h3>
           <p className="answer">{String(detail.answer || "")}</p>
           <p className="muted">
             Sources: {sources.length ? sources.map((s) => `${s.document}${s.page ? ` p.${s.page}` : ""}`).join("; ") : "None"}
           </p>
-        </div>
+        </section>
       )}
     </div>
   );

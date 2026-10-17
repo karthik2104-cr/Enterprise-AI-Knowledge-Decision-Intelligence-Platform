@@ -51,8 +51,11 @@ export default function AskPage() {
     <div>
       <h2 className="page-title">Ask AI</h2>
       <p className="lede">Grounded answers with citations, confidence, tools, and latency.</p>
-      <form className="card stack" onSubmit={onSubmit}>
-        <textarea value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Ask a question about policies, finances, or operations" />
+      <form className="panel stack" onSubmit={onSubmit}>
+        <label>
+          Question
+          <textarea value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Ask a question about policies, finances, or operations" />
+        </label>
         <div className="row">
           <button className="btn" disabled={busy || !question.trim()}>{busy ? "Working…" : "Submit"}</button>
         </div>
@@ -66,7 +69,7 @@ export default function AskPage() {
       </form>
       {error && <ErrorState message={error} />}
       {busy && <Loading label="Retrieving evidence and generating a structured answer…" />}
-      {data && !busy && <div style={{ marginTop: 16 }}><AnswerPanel data={data} /></div>}
+      {data && !busy && <div className="mt"><AnswerPanel data={data} /></div>}
       <Toast message={toast} />
     </div>
   );

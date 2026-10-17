@@ -22,7 +22,7 @@ function renderReport(content: Record<string, unknown>) {
           {typeof sections[key] === "string" ? (
             <p className="answer">{String(sections[key])}</p>
           ) : (
-            <pre style={{ whiteSpace: "pre-wrap", fontSize: 13 }}>{JSON.stringify(sections[key] ?? "—", null, 2)}</pre>
+            <pre className="json">{JSON.stringify(sections[key] ?? "—", null, 2)}</pre>
           )}
         </div>
       ))}
@@ -69,33 +69,38 @@ export default function ReportsPage() {
     <div>
       <h2 className="page-title">Reports</h2>
       <p className="lede">Generate and store structured management reports.</p>
-      <form className="card stack" onSubmit={onSubmit}>
-        <textarea value={question} onChange={(e) => setQuestion(e.target.value)} />
+      <form className="panel stack" onSubmit={onSubmit}>
+        <label>
+          Report request
+          <textarea value={question} onChange={(e) => setQuestion(e.target.value)} />
+        </label>
         <button className="btn" disabled={busy}>{busy ? "Generating…" : "Generate report"}</button>
       </form>
       {error && <ErrorState message={error} />}
       {busy && <Loading label="Planning, retrieving, verifying, and writing the report…" />}
-      <div className="card" style={{ marginTop: 16 }}>
+      <div className="panel mt">
         <h3>Stored reports</h3>
         {reports.length === 0 ? (
           <Empty title="No reports" body="Generate a Q3 performance report to populate this list." />
         ) : (
+          <div className="table-wrap flat">
           <table>
             <thead><tr><th>Title</th><th>Status</th><th>Created</th></tr></thead>
             <tbody>
               {reports.map((r) => (
                 <tr key={r.id}>
-                  <td><button className="btn secondary" onClick={() => setSelected(r)}>{r.title}</button></td>
-                  <td>{r.status}</td>
+                  <td><button className="btn link" onClick={() => setSelected(r)}>{r.title}</button></td>
+                  <td><span className={`badge ${r.status}`}>{r.status}</span></td>
                   <td className="muted">{r.created_at ? new Date(r.created_at).toLocaleString() : ""}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
       {selected && (
-        <div className="card" style={{ marginTop: 16 }}>
+        <div className="report-doc mt">
           <h3>{selected.title}</h3>
           {renderReport(selected.content)}
         </div>

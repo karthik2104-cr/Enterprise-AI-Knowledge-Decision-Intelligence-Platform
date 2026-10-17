@@ -19,6 +19,58 @@ and return:
 
 Default AI providers are **deterministic mocks** so the project runs without paid API keys.
 
+**UI:** Northwind Intelligence is a premium dark operations console (navy/graphite surfaces, cyan primary actions, teal status). The screenshots below are from the running demo, not mockups.
+
+## Interface
+
+### Dashboard
+
+Operational overview of the knowledge base, questions, and evaluation activity.
+
+![Dashboard](docs/screenshots/dashboard.png)
+
+### Ask AI
+
+Grounded answers with citations, confidence, tools, latency, and retrieved evidence.
+
+![Ask AI](docs/screenshots/ask-ai.png)
+
+### Documents
+
+Ingestion, indexed status, and document management.
+
+![Documents](docs/screenshots/documents.png)
+
+### Search
+
+Hybrid retrieval with metadata filters, independent of Ask AI.
+
+![Search](docs/screenshots/search.png)
+
+### Analysis
+
+Analytical questions that combine documents, catalogued metrics, and calculations.
+
+![Analysis](docs/screenshots/analysis.png)
+
+### Evaluation
+
+Heuristic retrieval and generation metrics on the golden question set.
+
+![Evaluation](docs/screenshots/evaluation.png)
+
+### Reports
+
+Structured management reports with stored history.
+
+![Reports](docs/screenshots/reports.png)
+
+### Login
+
+Demo JWT sign-in for the operations console.
+
+![Login](docs/screenshots/login.png)
+
 ## Architecture
 
 ```mermaid
@@ -58,7 +110,7 @@ React talks to FastAPI. The orchestrator plans tools, retrieves evidence, genera
 
 **Evaluation:** Precision@K, Recall@K, MRR, NDCG@K, answer correctness, relevance, groundedness, citation correctness, unsupported-claim rate.
 
-**Product UI:** Dashboard, Ask AI, Documents, Search, Analysis, Reports, Evaluation, History, Settings.
+**Product UI:** Dashboard, Ask AI, Documents, Search, Analysis, Reports, Evaluation, History, Settings, and Login — shared dark design tokens for surfaces, forms, tables, badges, and empty/error/loading states.
 
 ## Tech stack
 
@@ -197,22 +249,25 @@ cd frontend
 npm run build
 ```
 
-Frontend production build succeeds.
+Frontend production build succeeds. TypeScript `tsc --noEmit` succeeds.
 
 ## CI
 
-`.github/workflows/ci.yml` installs backend dependencies, runs pytest with mock providers, installs frontend dependencies, and builds the UI. The workflow file is present and internally consistent. A remote GitHub Actions run has not been verified from this environment.
+`.github/workflows/ci.yml` installs backend dependencies, runs pytest with mock providers, installs frontend dependencies, and builds the UI.
+
+Repository: [karthik2104-cr/Enterprise-AI-Knowledge-Decision-Intelligence-Platform](https://github.com/karthik2104-cr/Enterprise-AI-Knowledge-Decision-Intelligence-Platform)
 
 ## Project structure
 
 ```
-backend/       FastAPI app, retrieval, RAG, tools, tests
-frontend/      React workspace
-prompts/       Planner, RAG, verifier, report, extraction templates
-sample_data/   Demo documents used for seed
-evaluation/    Golden set and eval scripts
-docs/          Architecture notes
-.github/       GitHub Actions
+backend/           FastAPI app, retrieval, RAG, tools, tests
+frontend/          React workspace (dark operations UI)
+prompts/           Planner, RAG, verifier, report, extraction templates
+sample_data/       Demo documents used for seed
+evaluation/        Golden set and eval scripts
+docs/              Architecture notes
+docs/screenshots/  Live UI captures used in this README
+.github/           GitHub Actions
 ```
 
 ## Limitations

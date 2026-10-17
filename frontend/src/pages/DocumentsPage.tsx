@@ -43,15 +43,27 @@ export default function DocumentsPage() {
     <div>
       <h2 className="page-title">Documents</h2>
       <p className="lede">Upload, inspect ingestion status, and review chunks.</p>
-      <form className="card row" onSubmit={onUpload} style={{ marginBottom: 16 }}>
-        <input name="file" type="file" required />
-        <input name="department" placeholder="Department" style={{ maxWidth: 160 }} />
-        <input name="doc_type" placeholder="Type" style={{ maxWidth: 140 }} />
-        <input name="year" placeholder="Year" style={{ maxWidth: 100 }} />
-        <button className="btn">Upload</button>
+      <form className="panel row mb" onSubmit={onUpload}>
+        <label>
+          File
+          <input name="file" type="file" required />
+        </label>
+        <label>
+          Department
+          <input name="department" className="w-dept" placeholder="Optional" />
+        </label>
+        <label>
+          Type
+          <input name="doc_type" className="w-type" placeholder="Optional" />
+        </label>
+        <label>
+          Year
+          <input name="year" className="w-year" placeholder="Optional" />
+        </label>
+        <button className="btn align-end">Upload</button>
       </form>
-      <div className="row" style={{ marginBottom: 12 }}>
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Filter by title" style={{ maxWidth: 280 }} />
+      <div className="row mb-sm">
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Filter by title" className="w-filter" />
         <button className="btn secondary" onClick={() => load(q)}>Filter</button>
       </div>
       {error && <ErrorState message={error} />}
@@ -60,7 +72,7 @@ export default function DocumentsPage() {
       ) : docs.length === 0 ? (
         <Empty title="No documents" body="Upload a PDF, DOCX, TXT, or Markdown file." />
       ) : (
-        <div className="card">
+        <div className="table-wrap">
           <table>
             <thead>
               <tr>
@@ -71,14 +83,14 @@ export default function DocumentsPage() {
               {docs.map((d) => (
                 <tr key={d.id}>
                   <td>
-                    <button className="btn secondary" onClick={async () => setSelected(await api.document(d.id))}>{d.title}</button>
+                    <button className="btn link" onClick={async () => setSelected(await api.document(d.id))}>{d.title}</button>
                     {d.error_message && <div className="muted">{d.error_message}</div>}
                   </td>
                   <td><span className={`badge ${d.status}`}>{d.status}</span></td>
                   <td>{d.department || "—"}</td>
                   <td>{d.doc_type || "—"}</td>
-                  <td>{d.chunk_count}</td>
-                  <td>{d.ingested_ms ?? "—"}</td>
+                  <td className="num">{d.chunk_count}</td>
+                  <td className="num">{d.ingested_ms ?? "—"}</td>
                   <td>
                     <button className="btn danger" onClick={async () => { await api.deleteDocument(d.id); await load(q); }}>Delete</button>
                   </td>
@@ -89,10 +101,10 @@ export default function DocumentsPage() {
         </div>
       )}
       {selected && (
-        <div className="card" style={{ marginTop: 16 }}>
+        <section className="panel mt">
           <h3>Document details</h3>
-          <pre style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(selected, null, 2)}</pre>
-        </div>
+          <pre className="json">{JSON.stringify(selected, null, 2)}</pre>
+        </section>
       )}
       <Toast message={toast} />
     </div>

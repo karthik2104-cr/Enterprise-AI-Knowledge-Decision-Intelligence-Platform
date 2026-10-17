@@ -27,17 +27,20 @@ export default function AnalysisPage() {
     <div>
       <h2 className="page-title">Analysis</h2>
       <p className="lede">Analytical questions that may combine documents, metrics, and calculations.</p>
-      <form className="card stack" onSubmit={onSubmit}>
-        <textarea value={question} onChange={(e) => setQuestion(e.target.value)} />
+      <form className="panel stack" onSubmit={onSubmit}>
+        <label>
+          Analysis question
+          <textarea value={question} onChange={(e) => setQuestion(e.target.value)} />
+        </label>
         <button className="btn" disabled={busy}>{busy ? "Analyzing…" : "Run analysis"}</button>
       </form>
       {error && <ErrorState message={error} />}
       {busy && <Loading />}
       {data && !busy && (
-        <div style={{ marginTop: 16 }}>
+        <div className="mt">
           <AnswerPanel data={data} />
           {data.retrieval && (
-            <div className="card" style={{ marginTop: 12 }}>
+            <div className="panel mt-sm">
               <h3>Plan</h3>
               <p className="muted">Tools and intent chosen for this analysis. Hidden model reasoning is not shown.</p>
               <div className="chips">
